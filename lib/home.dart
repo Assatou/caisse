@@ -1,62 +1,56 @@
 import 'package:flutter/material.dart';
 
-import 'scan.dart';
+class Firstroute extends StatelessWidget {
+  final String title;
 
-class FirstRoute extends StatelessWidget {
+  Firstroute({Key key, this.title}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+      appBar: AppBar(title: Text('home')),
+      body: Center(
+          child: Column(
+        children: <Widget>[
+          RaisedButton(onPressed: null, child: Text('Scanner')),
+          RaisedButton(
+            onPressed: null,
+            child: Text('voir mon stock'),
+          )
+        ],
+      )),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+
           children: <Widget>[
-            FlatButton(
-              padding: EdgeInsets.all(15.0),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Scan()),
-                );
-
-                // try{
-                //   BarcodeScanner.scan()    this method is used to scan the QR code
-                // }catch (e){
-                //   BarcodeScanner.CameraAccessDenied;   we can print that user has denied for the permisions
-                //   BarcodeScanner.UserCanceled;   we can print on the page that user has cancelled
-                // }
-              },
-              child: Text(
-                "Scanner",
-                style: TextStyle(
-                    color: Colors.lightGreen, fontWeight: FontWeight.bold),
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
               ),
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.yellow, width: 3.0),
-                  borderRadius: BorderRadius.circular(20.0)),
             ),
-            FlatButton(
-              padding: EdgeInsets.all(15.0),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Scan()),
-                );
-
-                // try{
-                //   BarcodeScanner.scan()    this method is used to scan the QR code
-                // }catch (e){
-                //   BarcodeScanner.CameraAccessDenied;   we can print that user has denied for the permisions
-                //   BarcodeScanner.UserCanceled;   we can print on the page that user has cancelled
-                // }
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
               },
-              child: Text(
-                "voir mon stock",
-                style: TextStyle(
-                    color: Colors.lightGreen, fontWeight: FontWeight.bold),
-              ),
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.yellow, width: 3.0),
-                  borderRadius: BorderRadius.circular(20.0)),
-            )
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),

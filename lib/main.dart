@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:caisse/home.dart';
+import 'package:caisse/scan.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +13,7 @@ void main() {
     home: Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
-        child: MyApp(),
+        child: Scan(),
       ),
     ),
   ));
@@ -105,7 +106,7 @@ class _MyAppState extends State<MyApp> {
       Fluttertoast.showToast(
           msg: "Connexion réussie", toastLength: Toast.LENGTH_SHORT);
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => FirstRoute()));
+          .push(MaterialPageRoute(builder: (context) => Firstroute()));
     }
     setState(() {
       processing = false;

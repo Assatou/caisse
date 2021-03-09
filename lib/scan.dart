@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class Scan extends StatefulWidget {
   @override
@@ -10,6 +13,25 @@ class Scan extends StatefulWidget {
 }
 
 class _ScanState extends State<Scan> {
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(
+      source: ImageSource.gallery,
+      maxWidth: 500,
+      maxHeight: 500,
+    );
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('');
+      }
+    });
+  }
+
   TextEditingController nom = new TextEditingController();
   TextEditingController quantite = new TextEditingController();
   TextEditingController prix = new TextEditingController();
@@ -27,12 +49,8 @@ class _ScanState extends State<Scan> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Scanner"),
-        centerTitle: true,
-      ),
-      body: Container(
+    return SingleChildScrollView(
+      child: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -72,6 +90,11 @@ class _ScanState extends State<Scan> {
             ),
             SizedBox(
               height: 20,
+            ),
+            _image == null ? Text('') : Image.file(_image),
+            FlatButton(
+              onPressed: getImage,
+              child: Icon(Icons.add_a_photo),
             ),
             FlatButton(
               padding: EdgeInsets.all(15.0),

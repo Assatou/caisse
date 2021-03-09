@@ -41,5 +41,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<application
+            android:requestLegacyExternalStorage="true"
+            android:name="io.flutter.app.FlutterApplication"
+            android:label="xxxxxx"
+            android:icon="@mipmap/launcher_icon">
+            <activity>
+                    ...
+                    ...
+            </activity>
+    </application>
 </dict>
 </plist>
